@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, BookInstance, Language, Genre
+from django.views.generic import CreateView, DetailView, ListView
 
 
 def index(request):
@@ -14,4 +15,21 @@ def index(request):
         'num_instances_available': num_instances_available
     }
 
-    return render(request, 'index.html', context=context)
+    return render(request, 'catalog/index.html', context=context)
+
+
+class BookCreate(CreateView):
+    model = Book
+    fields = '__all__'
+
+    # success_url =
+
+
+class BookDetail(DetailView):
+    # mapping = model_detail.html
+    model = Book
+
+
+class BookList(ListView):
+
+    model = Book
